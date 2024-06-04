@@ -71,6 +71,8 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # Raise error when a before_action's only/except options reference missing actions
-  config.action_controller.raise_on_missing_callback_actions = true
+  # Remove this line
+  # config.action_controller.raise_on_missing_callback_actions = true
+  
+  config.hosts << "0096899839c44c9a8e1ac51659453a2f.vfs.cloud9.ap-northeast-1.amazonaws.com"
 end
