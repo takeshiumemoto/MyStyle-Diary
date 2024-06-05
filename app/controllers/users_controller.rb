@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
     def index
+        @post = Post.new 
         @users = User.all
     end 
     
     def show
-        @user = User.params[:id]
+       @post = Post.new
+       @user = User.find(params[:id])
     end     
 end

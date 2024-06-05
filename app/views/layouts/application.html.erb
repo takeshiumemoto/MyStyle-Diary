@@ -34,7 +34,7 @@
                 ユーザーページ
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">マイページ</a></li>
+                <li><%= link_to "マイページ",user_path(current_user),class: "dropdown-item" %></li>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
                 <li><a class="dropdown-item" href="#">セッティング</a></li>
               </ul>
