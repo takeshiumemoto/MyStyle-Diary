@@ -1,18 +1,49 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-.white-link {
-  color: white !important;
+body header {
+  margin-top: 0 !important;
+  padding-top: 0 !important; /* 必要に応じてpaddingもリセット */
+}
+.equal-width-button {
+  display: block;
+  width: 100%;
+  max-width: 300px; /* 必要に応じて適切な幅に設定 */
+  text-align: center;
+  padding: 10px 20px;
+  margin: 10px 0; /* ボタン間のスペースを縦方向に調整 */
+}
+
+.equal-width-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* 縦に並べる */
+}
+
+.content {
+  text-align: center; /* コンテンツを中央に配置 */
+  color: white; /* 必要に応じてテキストカラーを調整 */
+}
+
+.background-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.background-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 背景画像の上に半透明のオーバーレイを追加 */
+  z-index: 1; /* オーバーレイを前面に配置 */
+}
+
+.content {
+  z-index: 2; /* コンテンツをオーバーレイの前面に配置 */
 }
