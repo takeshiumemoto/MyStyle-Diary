@@ -1,6 +1,10 @@
-body header {
+header {
   margin-top: 0 !important;
   padding-top: 0 !important; /* 必要に応じてpaddingもリセット */
+}
+body {
+  margin: 0;
+  padding: 0;
 }
 .equal-width-button {
   display: block;

@@ -1,0 +1,21 @@
+{
+  "name": "MyStyle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:takeshiumemoto/MyStyle-Diary.git",
+  "license": "MIT",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@rails/actioncable": "^7.1.3-4",
+    "@rails/activestorage": "^7.1.3-4",
+    "@rails/ujs": "^7.1.3-4",
+    "@rails/webpacker": "5.4.4",
+    "turbolinks": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3"
+  }
+}
