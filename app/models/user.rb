@@ -5,4 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_image    
   has_many :posts,dependent: :destroy
+  
+  def get_profile_image
+    if profile_image.attached?
+      profile_image
+    else
+      'no_profile.jpg'
+    end 
+  end   
 end

@@ -1,0 +1,4 @@
+<H4>ユーザー情報</H4>
+<h4><%= image_tag user.get_profile_image, class: 'img-fluid' %></h4>
+<h4>ユーザー名:<%= user.name %></h4>
+<h4><%= link_to raw('<i class="fa-solid fa-gear"></i>'), edit_user_path(user) %></h4>
