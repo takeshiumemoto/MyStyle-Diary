@@ -1,4 +1,24 @@
-<H4>ユーザー情報</H4>
-<h4><%= image_tag user.get_profile_image, class: 'img-fluid' %></h4>
-<h4>ユーザー名:<%= user.name %></h4>
-<h4><%= link_to raw('<i class="fa-solid fa-gear"></i>'), edit_user_path(user) %></h4>
+<!-- app/views/users/_profile.html.erb -->
+<!-- app/views/users/_profile.html.erb -->
+<div class="card mb-4">
+  <div class="card-header bg-primary text-white">
+    <h4 class="text-center">ユーザー情報</h4>
+  </div>
+  <div class="card-body text-center">
+    <% if current_user %>
+      <% profile_image = current_user.get_profile_image %>
+      <% if profile_image.is_a?(ActiveStorage::Attached::One) && profile_image.attached? %>
+        <%= image_tag profile_image, class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
+      <% else %>
+        <%= image_tag 'no_profile.jpg', class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
+      <% end %>
+      <h5>ユーザー名: <%= current_user.name %></h5>
+      <%= link_to raw('<i class="fa-solid fa-gear"></i> プロフィールを編集'), edit_user_path(current_user.id), class: "btn btn-outline-primary mt-3" %>
+    <% else %>
+      <%= image_tag 'no_profile.jpg', class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
+      <h5>ユーザー名: 不明</h5>
+      <%= link_to raw('<i class="fa-solid fa-gear"></i> プロフィールを編集'), '#', class: "btn btn-outline-primary mt-3" %>
+    <% end %>
+  </div>
+</div>
+

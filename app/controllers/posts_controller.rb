@@ -7,22 +7,24 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to posts_path, notice: '投稿が成功しました'
+      redirect_to posts_path, notice: '投稿が作成されました。'
     else
-      render :new
+      @posts = Post.all
+      render :index, alert: '投稿に失敗しました。入力内容を確認してください。'
     end
   end
 
   def index
     @posts = Post.all.order(created_at: :desc).limit(8)
+    @post = Post.new
     @user = current_user
   end
 
   def show
     @post = Post.find(params[:id])
+    @user = @post.user
   end
 
   def edit

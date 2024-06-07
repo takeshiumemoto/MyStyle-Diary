@@ -7,8 +7,8 @@
         <%= render "users/profile", user: @user %>
       </div>
       <!-- 投稿フォーム -->
-      <div>
-        <%= render "new" %>
+      <div class="mb-4">
+        <%= render "new",post: @post %>
       </div>
     </div>
 
@@ -20,10 +20,10 @@
           <div class="col-md-6 mb-4">
             <div class="card">
               <% if post.image.attached? %>
-                <%= image_tag post.image, class: 'card-img-top',width: '100',height: '100' %>
+               <%= image_tag post.image, class: 'card-img-top',width: '100',height: '100' %>
               <% end %>
               <div class="card-body">
-                <h4 class="card-title"><%= link_to post.title,post_path(post)%></h4>
+                <h4 class="card-title"><%= link_to post.title, user_path(post.user_id) %></h4>
                 <p class="card-text"><%= post.content %></p>
                 <p class="card-text"><small class="text-muted">投稿日: <%= post.created_at.strftime('%Y/%m/%d') %></small></p>
               </div>

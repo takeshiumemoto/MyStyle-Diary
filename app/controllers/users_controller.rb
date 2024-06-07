@@ -2,7 +2,8 @@ class UsersController < ApplicationController
     before_action :is_matching_login_user,except:[:index]
     def index
         @post = Post.new 
-        @users = User.all
+        @user = current_user
+        @users = User.all 
     end 
     
     def show

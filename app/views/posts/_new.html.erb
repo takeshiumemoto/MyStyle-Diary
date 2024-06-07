@@ -1,28 +1,37 @@
-<h4 class="text-center my-4">新規投稿</h4>
-
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <%= form_with model: @post, local: true, html: { class: 'form' } do |f| %>
-        <div class="mb-3">
-          <h4>画像</h4>
-          <%= f.file_field :image, accept: "image/*", class: 'form-control' %>
-        </div>
-
-        <div class="mb-3">
-          <h4>タイトル</h4>
-          <%= f.text_field :title, class: 'form-control' %>
-        </div>
-
-        <div class="mb-3">
-          <h4>本文</h4>
-          <%= f.text_area :content, class: 'form-control', rows: 5 %>
-        </div>
-
-        <div class="d-grid">
-          <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
-        </div>
+<div class="card">
+  <div class="card-header bg-primary text-white">
+    <h4 class="text-center my-2">新規投稿</h4>
+  </div>
+  <% if @post.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>次のエラーがあります:</h4>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
-    </div>
+    </ul>
+  </div>
+<% end %>
+  <div class="card-body">
+    <%= form_with model: @post, local: true, html: { class: 'form' } do |f| %>
+      <div class="mb-3">
+        <h5>画像</h5>
+        <%= f.file_field :image, accept: "image/*", class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <h5>タイトル</h5>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <h5>本文</h5>
+        <%= f.text_area :content, class: 'form-control', rows: 5 %>
+      </div>
+
+      <div class="d-grid">
+        <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,8 +1,18 @@
-<h1 class="text-center my-4">投稿詳細ページ</h1>
-
+<!-- 投稿詳細ページ -->
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row">
+    <!-- ユーザー情報 -->
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <%= render "users/profile", user: @user %>
+        </div>
+      </div>
+    </div>
+
+    <!-- 投稿詳細 -->
     <div class="col-md-8">
+      <h1 class="text-center my-4">投稿詳細ページ</h1>
       <div class="card mb-3">
         <div class="card-body">
           <% if @post.image.attached? %>
@@ -14,13 +24,13 @@
           <p class="card-text">内容: <%= @post.content %></p>
           <p class="card-text">ユーザーネーム: <%= @post.user.name %></p>
           <p class="card-text">投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
+          <%= link_to '戻る', posts_path, class: 'btn btn-secondary' %>
+          <% if @post.user_id == current_user.id %>
+            <%= link_to "編集する", edit_post_path(@post), class: 'btn btn-info mt-2' %>
+            <%= link_to "削除する", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger mt-2' %>
+          <% end %>    
         </div>
       </div>
-      <%= link_to '戻る', posts_path, class: 'btn btn-secondary' %>
-      <% if @post.user_id == current_user.id %>
-        <%= link_to "編集する", edit_post_path(@post), class: 'btn btn-info' %>
-        <%= link_to "削除する", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger' %>
-      <% end %>    
     </div>
   </div>
 </div>
