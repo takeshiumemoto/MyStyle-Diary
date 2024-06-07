@@ -1,9 +1,28 @@
-  <%= stylesheet_link_tag 'about', media: 'all', 'data-turbo-track': 'reload' %>
-  <%= javascript_pack_tag 'about', 'data-turbo-track': 'reload' %>
-<h1 class="text-center">機能紹介</h1>  
+<%= stylesheet_link_tag 'about', media: 'all', 'data-turbo-track': 'reload' %>
+<%= javascript_pack_tag 'about', 'data-turbo-track': 'reload' %>
+
+<!-- about.html.erb -->
+<h1 class="text-center">機能紹介</h1>
 <div class="about-page">
-  <div class="about-page">
-  <div id="section1" style="background-image: url('<%= asset_path('3.jpg') %>');"></div>
-  <div id="section2" style="background-image: url('<%= asset_path('2.jpg') %>');"></div>
+  <div id="section1" class="background-section" style="background-image: url('<%= asset_path('3.jpg') %>');">
+    <div class="overlay">
+      <h1 id="heading1">自分だけの日記を記録として残しませんか</h1>
+      <p id="subheading1">自分に起こった出来事やその時感じたこと、思い出を記録として残しましょう</p>
+    </div>
+  </div>
+  <div id="section2" class="background-section" style="background-image: url('<%= asset_path('2.jpg') %>');">
+    <div class="overlay">
+      <h1 id="heading2">カレンダーツールで予定を管理しよう</h1>
+      <p id="subheading2">シンプルなカレンダーで自分の予定が一目でわかります</p>
+    </div>
+  </div>
 </div>
+
+<div class="button-container text-center my-4">
+  <div class="btn btn-secondary equal-width-button">
+    <%= link_to "新規登録はこちらから", new_user_registration_path, class: "text-white" %>
+  </div>
+  <div class="btn btn-secondary equal-width-button">
+    <%= link_to "アカウントをお持ちの方はこちらから", new_user_session_path, class: "text-white" %>
+  </div>
 </div>
