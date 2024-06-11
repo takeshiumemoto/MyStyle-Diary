@@ -1,0 +1,50 @@
+<!-- app/views/searches/search.html.erb -->
+<h2>検索結果</h2>
+
+<div class="table-responsive">
+  <table class="table table-hover table-bordered">
+    <!-- 検索対象モデルが User の時 -->
+    <% if @range == "User" %>
+      <thead>
+        <tr>
+          <th scope="col">プロフィール画像</th>
+          <th scope="col">名前</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td class="text-center">
+              <% if user.profile_image.attached? %>
+                <%= image_tag user.profile_image, class: "img-thumbnail", size: "100x100" %>
+              <% else %>
+                <%= image_tag user.get_profile_image, class: "img-thumbnail", size: "100x100" %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to user.name, user_path(user), class: "text-decoration-none" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      <!-- 検索対象モデルが Post の時 -->
+      <thead>
+        <tr>
+          <th scope="col">タイトル</th>
+          <th scope="col">内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td>
+              <%= link_to post.title, post_path(post), class: "text-decoration-none" %>
+            </td>
+            <td><%= truncate(post.content, length: 100) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  </table>
+</div>

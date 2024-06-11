@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   get 'homes/about'
   root to:'homes#top'
-  resources :users
-  resources :posts
+  resources :users,only:[:index,:show,:edit,:update] do
+  end   
+  resources :posts do
+    resources :post_comments,only:[:create,:destroy]
+  end   
+  get 'search'=>'searches#search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

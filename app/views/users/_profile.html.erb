@@ -1,14 +1,12 @@
-<!-- app/views/users/_profile.html.erb -->
-<!-- app/views/users/_profile.html.erb -->
 <div class="card mb-4">
   <div class="card-header bg-primary text-white">
     <h4 class="text-center">ユーザー情報</h4>
   </div>
   <div class="card-body text-center">
     <% if current_user %>
-      <% profile_image = current_user.get_profile_image %>
-      <% if profile_image.is_a?(ActiveStorage::Attached::One) && profile_image.attached? %>
-        <%= image_tag profile_image, class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
+      <% profile_image_path = current_user.get_profile_image(100, 100) %>
+      <% if profile_image_path != 'no_profile.jpg' %>
+        <%= image_tag profile_image_path, class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
       <% else %>
         <%= image_tag 'no_profile.jpg', class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
       <% end %>
