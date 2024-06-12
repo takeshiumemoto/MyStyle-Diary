@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :is_matching_login_user,except:[:index]
+    before_action :is_matching_login_user,except:[:index,:show]
     def index
         @post = Post.new 
         @user = current_user

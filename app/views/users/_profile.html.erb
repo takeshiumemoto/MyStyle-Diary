@@ -4,19 +4,19 @@
   </div>
   <div class="card-body text-center">
     <% if current_user %>
-      <% profile_image_path = current_user.get_profile_image(100, 100) %>
+      <% profile_image_path = user.get_profile_image(100, 100) %>
       <% if profile_image_path != 'no_profile.jpg' %>
         <%= image_tag profile_image_path, class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
       <% else %>
         <%= image_tag 'no_profile.jpg', class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
       <% end %>
-      <h5>ユーザー名: <%= current_user.name %></h5>
-      <%= link_to raw('<i class="fa-solid fa-gear"></i> プロフィールを編集'), edit_user_path(current_user.id), class: "btn btn-outline-primary mt-3" %>
+      <h5>ユーザー名: <%= user.name %></h5>
+      <% if current_user.id == user.id %>
+        <%= link_to raw('<i class="fa-solid fa-gear"></i> プロフィールを編集'), edit_user_path(user.id), class: "btn btn-outline-primary mt-3" %>
+      <% end %>
     <% else %>
       <%= image_tag 'no_profile.jpg', class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
       <h5>ユーザー名: 不明</h5>
-      <%= link_to raw('<i class="fa-solid fa-gear"></i> プロフィールを編集'), '#', class: "btn btn-outline-primary mt-3" %>
     <% end %>
   </div>
 </div>
-
