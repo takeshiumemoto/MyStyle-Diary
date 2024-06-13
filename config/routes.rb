@@ -7,6 +7,20 @@ Rails.application.routes.draw do
     sessions:'public/sessions'
   }
   
+  namespace :admin do
+    root 'homes#top'
+    resources :users
+    get 'admin/users/check'=>'users#check'
+    patch 'admin/users/withdraw'=>'users#withdraw'
+    
+    resources :posts
+  end   
+  
+  
+  
+  
+  
+  
   get 'homes/about'
   root to:'homes#top'
   resources :users,only:[:index,:show,:edit,:update] do

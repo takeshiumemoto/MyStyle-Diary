@@ -19,6 +19,11 @@ class Admin::UsersController < ApplicationController
         end 
     end 
     
+    def check
+    end     
+    
+    def withdraw
+    end     
     private 
         def user_params
             params.require(:user).permit(:name)

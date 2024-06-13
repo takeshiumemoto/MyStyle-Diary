@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_one_attached :profile_image    
   has_many :posts,dependent: :destroy
   has_many :post_comments,dependent: :destroy
+  
+  enum is_active:{active:0,withdrawn:1}
   #プロフィール写真
   def get_profile_image(width,height)
     if profile_image.attached?
