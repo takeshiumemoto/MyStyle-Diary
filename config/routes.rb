@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   
   namespace :admin do
     root 'homes#top'
-    resources :users
-    get 'admin/users/check'=>'users#check'
-    patch 'admin/users/withdraw'=>'users#withdraw'
-    
-    resources :posts
-  end   
-  
+    resources :posts,only:[:index,:show,:destroy]
+    resources :users do
+      member do 
+        patch :withdraw
+      end 
+    end
+  end  
   
   
   
@@ -37,4 +37,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-end
+end   

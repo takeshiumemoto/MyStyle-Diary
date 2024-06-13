@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <h1 class="mb-4">投稿詳細ページ</h1>
+  <div class="card">
+    <div class="card-header">
+      投稿詳細
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">投稿ID: <%= @post.id %></h5>
+      <p class="card-text"><strong>ユーザーID:</strong> <%= @post.user.id %></p>
+      <p class="card-text"><strong>投稿者:</strong> <%= @post.user.name %></p>
+      <p class="card-text"><strong>内容:</strong> <%= @post.content %></p>
+      <%= link_to '削除', admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+      <%= link_to '一覧に戻る', admin_posts_path, class: 'btn btn-secondary ms-2' %>
+    </div>
+  </div>
+</div>

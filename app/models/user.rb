@@ -6,8 +6,15 @@ class User < ApplicationRecord
   has_one_attached :profile_image    
   has_many :posts,dependent: :destroy
   has_many :post_comments,dependent: :destroy
+ #ユーザーステータス
+  def active_status
+    is_active ? "有効" : "退会済み"
+  end
   
-  enum is_active:{active:0,withdrawn:1}
+  #退会済みアカウントの処理
+    def active_for_authentication?
+      super && (is_actuve==true)
+    end   
   #プロフィール写真
   def get_profile_image(width,height)
     if profile_image.attached?
