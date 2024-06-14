@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     root 'posts#index'
+    get 'top'=>'homes#top'
     resources :posts,only:[:index,:show,:destroy]
     resources :users do
       member do 

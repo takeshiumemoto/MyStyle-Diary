@@ -10,7 +10,7 @@
       <p class="card-text"><strong>投稿者:</strong> <%= @post.user.name %></p>
       <p class="card-text"><strong>内容:</strong> <%= @post.content %></p>
       <%= link_to '削除', admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-      <%= link_to '一覧に戻る', admin_posts_path, class: 'btn btn-secondary ms-2' %>
+      <%= link_to '一覧に戻る',request.referer, class: 'btn btn-secondary ms-2' %>
     </div>
   </div>
 </div>

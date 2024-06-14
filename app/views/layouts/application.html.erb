@@ -13,9 +13,11 @@
   <body>
   <header>
     <% if user_signed_in? %>
-      <%= render 'user_header'%>
-    <% else %>
+      <%= render 'layouts/user_header'%>
+    <% elsif admin_signed_in? %>
       <%= render 'layouts/admin_header'%>
+    <% else%>
+      <%= render 'layouts/before_signin_header'%>
     <% end %>  
   </header>
     <% flash.each do |key,value| %>
