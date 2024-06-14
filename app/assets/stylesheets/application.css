@@ -51,3 +51,10 @@ body {
 .content {
   z-index: 2; /* コンテンツをオーバーレイの前面に配置 */
 }
+.navbar .navbar-nav .nav-link {
+  text-transform: none !important;
+}
+
+.navbar-brand {
+  text-transform: none !important;
+}
