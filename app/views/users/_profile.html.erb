@@ -4,7 +4,8 @@
   </div>
   <div class="card-body text-center">
     <% if current_user %>
-      <% profile_image_path = user.get_profile_image(100, 100) %>
+      <% user = current_user %> <!-- current_user から user を取得 -->
+      <% profile_image_path = user.get_profile_image(100, 100) rescue 'no_profile.jpg' %> <!-- メソッドがない場合の救済措置 -->
       <% if profile_image_path != 'no_profile.jpg' %>
         <%= image_tag profile_image_path, class: 'img-fluid rounded-circle mb-3', style: 'width: 100px; height: 100px;' %>
       <% else %>
