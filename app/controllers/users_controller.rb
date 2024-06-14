@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
-    before_action :is_matching_login_user,except:[:index,:show]
+    before_action :authenticate_user!, except: [:index]
+    before_action :is_matching_login_user, only: [:edit, :update, :destroy]
     def index
         @post = Post.new 
         @user = current_user
         @users = User.all 
+        @users = User.where(is_active: true)
     end 
     
     def show
