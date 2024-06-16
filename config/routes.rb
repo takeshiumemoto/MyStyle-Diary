@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   get 'homes/about'
   root to:'homes#top'
   resources :users,only:[:index,:show,:edit,:update] do
+    member do
+      get :follows,:followers
+    end 
+    resource :relationships,only:[:create,:destroy]
   end   
   resources :posts do
     resources :post_comments,only:[:create,:destroy]

@@ -25,6 +25,16 @@ class UsersController < ApplicationController
             render :edit, alert: 'プロフィールの更新に失敗しました。'
         end
     end
+    
+     def follows
+        user = User.find(params[:id])
+        @users = user.following_users
+    end 
+    
+    def followers
+        user = User.find(params[:id])
+        @users = user.follower_users
+    end     
 private 
     def is_matching_login_user
         unless user_signed_in?&&current_user.id==params[:id].to_i

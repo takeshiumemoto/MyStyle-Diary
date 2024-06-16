@@ -6,18 +6,18 @@ class FavoritesController < ApplicationController
   def create
     @favorite = Favorite.new(user_id: current_user.id, post_id: @post.id)
     if @favorite.save
-      redirect_to request.referer, notice: 'お気に入りに追加しました。'
+      redirect_to request.referer, notice: 'いいねをしました。'
     else
-      redirect_to request.referer, alert: 'お気に入りに追加できませんでした。'
+      redirect_to request.referer, alert: 'いいねをできませんでした。'
     end
   end
 
   def destroy
     @favorite = Favorite.find_by(user_id: current_user.id, post_id: @post.id)
     if @favorite&.destroy
-       redirect_to request.referer, notice: 'お気に入りを解除しました。'
+       redirect_to request.referer, notice: 'いいねを削除しました。'
     else
-      redirect_to request.referer, alert: 'お気に入りを解除できませんでした。'
+      redirect_to request.referer, alert: 'いいねを削除できませんでした。'
     end
   end
 
