@@ -22,10 +22,10 @@
     <!-- フォロー数とフォロワー数の表示 -->
     <div class="d-flex justify-content-center mt-3">
       <%= link_to follows_user_path(@user), class: 'text-decoration-none me-3 follow-link' do %>
-        <h5>Follows: <%= @user.followers.count %></h5>
+        <h6><%= @user.followers.count %>フォロー中</h6>
       <% end %>
       <%= link_to followers_user_path(@user), class: 'text-decoration-none follow-link' do %>
-        <h5>Followers: <%= @user.followeds.count %></h5>
+        <h6><%= @user.followeds.count %>フォロワー</h6>
       <% end %>
     </div>
 
