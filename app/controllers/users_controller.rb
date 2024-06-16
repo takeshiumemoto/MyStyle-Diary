@@ -8,6 +8,16 @@ class UsersController < ApplicationController
         @users = User.where(is_active: true)
     end 
     
+    
+    def follows
+        user = User.find(params[:id])
+        @users = user.following_users
+    end 
+    
+    def followers
+        user = User.find(params[:id])
+        @users = user.follower_users
+    end    
     def show
        @post = Post.new
        @user = User.find(params[:id])
@@ -26,15 +36,7 @@ class UsersController < ApplicationController
         end
     end
     
-     def follows
-        user = User.find(params[:id])
-        @users = user.following_users
-    end 
     
-    def followers
-        user = User.find(params[:id])
-        @users = user.follower_users
-    end     
 private 
     def is_matching_login_user
         unless user_signed_in?&&current_user.id==params[:id].to_i
