@@ -4,6 +4,11 @@ class Post < ApplicationRecord
   validates :title,presence: true
   validates :content,presence:true
   has_many :post_comments,dependent: :destroy
+  has_many :favorites,dependent: :destroy
+  #いいね定義
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end   
   
   #検索方法定義
   def self.looks(search,word)

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end   
   resources :posts do
     resources :post_comments,only:[:create,:destroy]
+    resource :favorite,only:[:create,:destroy]
   end   
   get 'search'=>'searches#search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
