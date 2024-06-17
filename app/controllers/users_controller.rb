@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     def index
         @post = Post.new 
         @user = current_user
-        @users = User.all 
         @users = User.where(is_active: true)
     end 
     
