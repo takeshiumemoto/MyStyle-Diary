@@ -1,0 +1,8 @@
+
+<%= javascript_pack_tag 'calendar', 'data-turbo-track': 'reload' %>
+
+<script>
+  let eventData = <%= raw @events.to_json %>;
+</script>
+
+<div id="calendar"></div>

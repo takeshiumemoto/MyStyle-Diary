@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'events/index'
   devise_for :admin,skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
@@ -35,6 +36,8 @@ Rails.application.routes.draw do
     resource :favorite,only:[:create,:destroy]
   end   
   get 'search'=>'searches#search'
+  get 'events'=>'events#index'
+  get '/events', to: 'events#index', defaults: { format: 'json' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
