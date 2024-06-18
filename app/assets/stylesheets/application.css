@@ -58,3 +58,15 @@ body {
 .navbar-brand {
   text-transform: none !important;
 }
+.dropdown-menu {
+  background-color: #f8f9fa; /* 明るい背景色 */
+  color: black; /* テキスト色 */
+}
+
+.dropdown-item {
+  color: black; /* ドロップダウンアイテムのテキスト色 */
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #e9ecef; /* ホバー時の背景色 */
+}
