@@ -7,7 +7,8 @@ import 'packs/calendar'; // Assuming calendar.js is in packs
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Popper from 'popper.js'; // 正しいPopper.jsをインポート
-
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
 window.$ = $;
 window.jQuery = $;
 window.Popper = Popper; // Popperをグローバルに設定

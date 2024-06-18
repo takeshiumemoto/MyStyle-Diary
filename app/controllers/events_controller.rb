@@ -15,13 +15,13 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path, notice: 'イベントが追加されました'
     else
-      render :new
+      render :index
     end
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:title, :start_time, :description)
+    params.require(:event).permit(:title, :start, :end)
   end
 end
