@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   
   get 'homes/about'
   root to:'homes#top'
+  
+  devise_scope :user do
+    post 'guest_sign_in', to: 'public/sessions#guest_sign_in', as: 'user_guest_sign_in'
+  end
   resources :users,only:[:index,:show,:edit,:update] do
     member do
       get :follows,:followers
@@ -48,3 +52,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end   
+
