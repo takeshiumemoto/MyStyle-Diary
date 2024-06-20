@@ -23,7 +23,6 @@
             <% if user_signed_in? %>
               <li><%= link_to "マイページ", user_path(current_user), class: "dropdown-item" %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-              <li><a class="dropdown-item" href="#">セッティング</a></li>
             <% else %>
               <li><%= link_to "ログイン", new_user_session_path, class: "dropdown-item" %></li>
               <li><%= link_to "新規登録", new_user_registration_path, class: "dropdown-item" %></li>
