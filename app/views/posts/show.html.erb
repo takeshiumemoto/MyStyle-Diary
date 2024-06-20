@@ -1,66 +1,49 @@
 <div class="container">
   <div class="row">
-    <!-- ユーザー情報 -->
-    <div class="col-md-4 mb-4">
-      <div class="card">
+    <!-- 投稿詳細 -->
+    <div class="col-md-8 offset-md-2">
+      <h1 class="text-center my-4"><%= @post.title %></h1>
+      <div class="card mb-4">
+        <% if @post.image.attached? %>
+          <div class="text-center">
+            <%= image_tag @post.image, class: 'img-fluid' %>
+          </div>
+        <% end %>
         <div class="card-body">
-          <%= render "users/profile", user: @user %>
+          <p class="card-text"><%= @post.content %></p>
+          <p class="card-text">投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
+          <p class="card-text favorite-count" id="favorite-count-<%= @post.id %>">
+            <%= @post.favorites.count %> いいね
+          </p>
+          <div id="favorite-link-<%= @post.id %>">
+            <%= render partial: "favorites/favorite_link", locals: { post: @post } %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 投稿詳細 -->
-    <div class="col-md-8">
-      <h1 class="text-center my-4">投稿詳細ページ</h1>
-      <div class="card mb-3">
+      <!-- コメント欄 -->
+      <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+          <h4>コメント一覧</h4>
+        </div>
+        <div class="card-body" id="comment_list">
+          <p id="comment_count">コメント件数: <%= @post.post_comments.count %></p>
+          <%= render partial: "post_comments/post_comment", collection: @post.post_comments, as: :post_comment %>
+        </div>
+      </div>
+
+      <!-- コメント入力フォーム -->
+      <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+          <h4>コメントを追加する</h4>
+        </div>
         <div class="card-body">
-          <% if @post.image.attached? %>
-            <div class="mb-3 text-center">
-              <%= image_tag @post.image, class: 'img-fluid' %>
-            </div>
-          <% end %>
-
-          <h4 class="card-title">タイトル: <%= @post.title %></h4>
-          <p class="card-text">内容: <%= @post.content %></p>
-          <p class="card-text">ユーザーネーム: <%= @post.user.name %></p>
-          <p class="card-text">投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
-
-          <!--いいね機能-->
-          <p class="card_text"><%= @post.favorites.count %>いいね</p>
-          <% if @post.favorited_by?(current_user) %>
-            <%= link_to post_favorite_path(@post), method: :delete, class: "favorite-link" do %>
-              <span style="color:red;">❤︎</span>
-            <% end %>
-          <% else %>
-            <%= link_to post_favorite_path(@post), method: :post, class: "favorite-link" do %>
-              <span style="color:blue;">❤︎</span>
-            <% end %>
-          <% end %>
-
-          <!-- コメント欄 -->
-          <div class="card mt-4">
-            <div class="card-header bg-primary text-white">
-              <h4>コメント一覧</h4>
-            </div>
-            <div class="card-body" id="comment_list">
-              <p id="comment_count">コメント件数: <%= @post.post_comments.count %></p>
-              <%= render partial: "post_comments/post_comment", collection: @post.post_comments, as: :post_comment %>
-            </div>
-          </div>
-
-          <!-- コメント入力フォーム -->
-          <div class="card mt-4">
-            <div class="card-header bg-primary text-white">
-              <h4>コメントを追加する</h4>
-            </div>
-            <div class="card-body">
-              <%= form_with model: [@post, PostComment.new], local: false do |f| %>
+          <%= form_with model: [@post, PostComment.new], remote: true do |f| %>
             <div class="form-group">
               <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
             </div>
-             <%= f.submit "送信する", class: "btn btn-primary" %>
-            <% end %>
-          </div>
+            <%= f.submit "送信する", class: "btn btn-primary" %>
+          <% end %>
         </div>
       </div>
     </div>
