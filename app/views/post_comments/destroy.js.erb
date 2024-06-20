@@ -1,0 +1,4 @@
+$("#post_comment_<%= @post_comment.id %>").remove();
+
+
+$("#comment_count").html('コメント件数: <%= @post_comment.post.post_comments.count %>');

@@ -19,12 +19,14 @@
               <%= image_tag @post.image, class: 'img-fluid' %>
             </div>
           <% end %>
+
           <h4 class="card-title">タイトル: <%= @post.title %></h4>
           <p class="card-text">内容: <%= @post.content %></p>
           <p class="card-text">ユーザーネーム: <%= @post.user.name %></p>
           <p class="card-text">投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
+
           <!--いいね機能-->
-          <p class="card_text"><%= @post.favorites.count%>いいね</p>
+          <p class="card_text"><%= @post.favorites.count %>いいね</p>
           <% if @post.favorited_by?(current_user) %>
             <%= link_to post_favorite_path(@post), method: :delete, class: "favorite-link" do %>
               <span style="color:red;">❤︎</span>
@@ -34,30 +36,15 @@
               <span style="color:blue;">❤︎</span>
             <% end %>
           <% end %>
-          
 
           <!-- コメント欄 -->
           <div class="card mt-4">
             <div class="card-header bg-primary text-white">
               <h4>コメント一覧</h4>
             </div>
-            <div class="card-body">
-              <p>コメント件数: <%= @post.post_comments.count %></p>
-              <% @post.post_comments.each do |post_comment| %>
-                <div class="media mb-4 p-3 border rounded">
-                 <%= link_to user_path(post_comment.user) do %>  
-                  <%= image_tag post_comment.user.get_profile_image(100, 100), alt: 'Profile Image', class: 'rounded-circle mr-3 profile-image' %>
-                 <% end %>  
-                  <div class="media-body">
-                    <h5 class="mt-0"><%= link_to post_comment.user.name,user_path(post_comment.user),class: 'text-decoration-none' %></h5>
-                    <small class="text-muted"><%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %></small>
-                    <p class="mt-2"><%= post_comment.comment %></p>
-                      <% if post_comment.user==current_user%>
-                        <%= link_to "削除",post_post_comment_path(post_comment.post,post_comment),method: :delete%>
-                      <% end %>  
-                  </div>
-                </div>
-              <% end %>
+            <div class="card-body" id="comment_list">
+              <p id="comment_count">コメント件数: <%= @post.post_comments.count %></p>
+              <%= render partial: "post_comments/post_comment", collection: @post.post_comments, as: :post_comment %>
             </div>
           </div>
 
@@ -67,20 +54,13 @@
               <h4>コメントを追加する</h4>
             </div>
             <div class="card-body">
-              <%= form_with model: [@post, @post_comment], local: true do |f| %>
-                <div class="form-group">
-                  <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
-                </div>
-                <%= f.submit "送信する", class: "btn btn-primary" %>
-              <% end %>
+              <%= form_with model: [@post, PostComment.new], local: false do |f| %>
+            <div class="form-group">
+              <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
             </div>
+             <%= f.submit "送信する", class: "btn btn-primary" %>
+            <% end %>
           </div>
-
-          <%= link_to '戻る',request.referer, class: 'btn btn-secondary mt-2' %>
-          <% if @post.user_id == current_user.id %>
-            <%= link_to "編集する", edit_post_path(@post), class: 'btn btn-info mt-2' %>
-            <%= link_to "削除する", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger mt-2' %>
-          <% end %>    
         </div>
       </div>
     </div>
