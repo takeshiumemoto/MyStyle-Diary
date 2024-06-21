@@ -31,5 +31,9 @@ class FavoritesController < ApplicationController
         format.js { render js: "alert('いいねの解除に失敗しました。');" }
       end
     end
+  end 
+  
+  def index 
+    @favorites = current_user.favorites.includes(:post).order('created_at DESC')
   end
-end
+end   

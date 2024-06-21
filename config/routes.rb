@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'events/index'
+  
   devise_for :admin,skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   
   
   
-  
+  #ユーザー側のルーティング
   get 'homes/about'
   root to:'homes#top'
   
@@ -40,9 +40,9 @@ Rails.application.routes.draw do
     resource :favorite,only:[:create,:destroy]
   end   
   get 'search'=>'searches#search'
-
-  resources :events, only: [:new, :create, :index, :show]  
   
+  resources :events, only: [:new, :create, :index, :show]  
+  get 'favorites',to:'favorites#index',as:'user_favorites'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
