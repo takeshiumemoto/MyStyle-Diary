@@ -29,5 +29,9 @@ class Post < ApplicationRecord
   #ソート機能
    scope :latest,->{order(created_at: :desc)}
    scope :old,->{order(created_at: :asc)}
-   scope :favorite_count,->{order(favorite: :desc)}
+   scope :favorite_count,->{
+     left_joins(:favorites)
+     .group(:id)
+     .order('COUNT(favorites.id) DESC')
+   }
 end
