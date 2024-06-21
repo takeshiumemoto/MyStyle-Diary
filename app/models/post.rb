@@ -25,4 +25,9 @@ class Post < ApplicationRecord
       @post = Post.all
     end   
   end     
+  
+  #ソート機能
+   scope :latest,->{order(created_at: :desc)}
+   scope :old,->{order(created_at: :asc)}
+   scope :favorite_count,->{order(favorite: :desc)}
 end

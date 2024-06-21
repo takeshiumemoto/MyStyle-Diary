@@ -1,42 +1,49 @@
-<div class="col-md-8">
-  <h1 class="text-center my-4">投稿一覧</h1>
+<div class="container">
   <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-md-6 mb-4">
-        <div class="card h-100">
-          <% if post.image.attached? %>
-            <%= image_tag post.image, class: 'card-img-top', style: 'height: 200px; object-fit: cover;' %>
-          <% end %>
-          <div class="card-body d-flex flex-column">
-            <h4 class="card-title">
-              <%= link_to post.title, post_path(post), class: 'text-decoration-none text-dark' %>
-            </h4>
-            <p class="card-text text-truncate" style="max-height: 4em; overflow: hidden;">
-              <%= post.content %>
-            </p>
-            <div class="mt-auto">
-              <div class="d-flex justify-content-between align-items-center">
-                <p class="mb-0">
-                  <%= link_to "#{post.post_comments.count} コメント", post_path(post), class: "btn btn-link p-0" %>
-                </p>
-                <p class="mb-0 favorite-count" id="favorite-count-<%= post.id %>">
-                  <%= post.favorites.count %> いいね
+    <!-- ユーザー情報と投稿フォーム -->
+    <div class="col-md-4">
+      <!-- ユーザー情報 -->
+      <div class="mb-4">
+        <%= render "users/profile", user: @user %>
+      </div>
+      <!-- 投稿フォーム -->
+      <div class="mb-4">
+        <%= render "new", post: @post %>
+      </div>
+    </div>
+
+    <!-- 投稿一覧 -->
+    <div class="col-md-8">
+      <h1 class="text-center my-4">投稿一覧</h1>
+      <div class="row">
+        <% @posts.each do |post| %>
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <% if post.image.attached? %>
+                <%= image_tag post.image, class: 'card-img-top', style: 'height: 200px; object-fit: cover;' %>
+              <% end %>
+              <div class="card-body">
+                <h4 class="card-title"><%= link_to post.title, post_path(post), class: 'text-decoration-none text-dark' %></h4>
+                <p class="card-text text-truncate" style="max-height: 4em; overflow: hidden;"><%= post.content %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="mb-0">
+                    <%= link_to "#{post.post_comments.count} コメント", post_path(post), class: "btn btn-link p-0" %>
+                  </p>
+                  <p class="mb-0 favorite-count" data-post-id="<%= post.id %>">
+                    <%= post.favorites.count %> いいね
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center" id="favorite-link-<%= post.id %>">
+                  <%= render partial: "favorites/favorite_link", locals: { post: post } %>
+                </div>
+                <p class="card-text mt-2">
+                  <small class="text-muted">投稿日: <%= post.created_at.strftime('%Y/%m/%d') %></small>
                 </p>
               </div>
-              <div class="d-flex justify-content-between align-items-center mt-2">
-                <% if user_signed_in? %>
-                  <div id="favorite-link-<%= post.id %>">
-                    <%= render partial: "favorites/favorite_link", locals: { post: post } %>
-                  </div>
-                <% end %>
-              </div>
-              <p class="card-text mt-2">
-                <small class="text-muted">投稿日: <%= post.created_at.strftime('%Y/%m/%d') %></small>
-              </p>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

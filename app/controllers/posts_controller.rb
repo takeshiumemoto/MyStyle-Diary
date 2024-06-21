@@ -17,7 +17,15 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc).limit(8)
+    if params[:latest]
+      @posts = Post.latest
+    elsif params[:old]
+      @posts = Post.old
+    elsif params[:favorite_count]
+      @posts = Post.favorite_count
+    else  
+      @posts = Post.all.order(created_at: :desc).limit(8)
+    end   
     @post = Post.new
     @user = current_user if user_signed_in?
   end
