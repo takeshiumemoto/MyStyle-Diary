@@ -1,8 +1,15 @@
 <div class="container">
   <div class="row">
+    <!-- ユーザー情報 -->
+    <div class="col-md-4">
+      <div class="mb-4">
+        <%= render "users/profile", user: @user %>
+      </div>
+    </div>
+    
     <!-- 投稿詳細 -->
-    <div class="col-md-8 offset-md-2">
-      <h1 class="text-center my-4"><%= @post.title%></h1>
+    <div class="col-md-8">
+      <h1 class="text-center my-4"><%= @post.title %></h1>
       <div class="card mb-4">
         <% if @post.image.attached? %>
           <div class="text-center">
