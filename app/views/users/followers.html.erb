@@ -10,33 +10,39 @@
     </tr>
   </thead>
   <tbody>
-    <% @user.followers.each do |follower| %> <!-- @user がフォローされているユーザーを列挙 -->
-      <tr>
-        <td>
-          <%= link_to user_path(follower) do %>
-            <%= image_tag follower.get_profile_image(50, 50), class: 'rounded-circle' %>
-          <% end %>
-        </td>
-        <td><%= follower.name %></td>
-        <td>
-          <%= link_to follows_user_path(follower), class: 'text-decoration-none' do %>
-            <h6><%= follower.followers.count %> フォロー</h6>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to followers_user_path(follower), class: 'text-decoration-none' do %>
-            <h6><%= follower.followeds.count %> フォロワー</h6>
-          <% end %>
-        </td>
-        <td>
-          <% if current_user != follower %>
-            <% if current_user.following?(follower) %>
-              <%= link_to "フォローを外す", user_relationships_path(follower.id), method: :delete, class: "btn btn-danger btn-sm" %>
-            <% else %>
-              <%= link_to "フォローする", user_relationships_path(follower.id), method: :post, class: "btn btn-success btn-sm" %>
+    <% if @followers.present? %>
+      <% @followers.each do |follower| %> <!-- @followers を利用 -->
+        <tr>
+          <td>
+            <%= link_to user_path(follower) do %>
+              <%= image_tag follower.get_profile_image(50, 50), class: 'rounded-circle' %>
             <% end %>
-          <% end %>
-        </td>
+          </td>
+          <td><%= follower.name %></td>
+          <td>
+            <%= link_to follows_user_path(follower), class: 'text-decoration-none' do %>
+              <h6><%= follower.following_users.count %> フォロー</h6>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to followers_user_path(follower), class: 'text-decoration-none' do %>
+              <h6><%= follower.follower_users.count %> フォロワー</h6>
+            <% end %>
+          </td>
+          <td>
+            <% if current_user != follower %>
+              <% if current_user.following?(follower) %>
+                <%= link_to "フォローを外す", user_relationships_path(follower.id), method: :delete, class: "btn btn-danger btn-sm" %>
+              <% else %>
+                <%= link_to "フォローする", user_relationships_path(follower.id), method: :post, class: "btn btn-success btn-sm" %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="5" class="text-center">フォロワーがいません</td>
       </tr>
     <% end %>
   </tbody>
