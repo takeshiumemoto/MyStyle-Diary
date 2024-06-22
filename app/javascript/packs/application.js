@@ -14,11 +14,18 @@ window.jQuery = $;
 window.Popper = Popper; // Popperをグローバルに設定
 
 
+console.log("Document ready. Initializing flatpickr...");
 $(document).on('turbolinks:load', function() {
-  $('.datetime-picker').flatpickr({
-    enableTime: true,
-    dateFormat: 'Y-m-d H:i',
-  });
+  console.log("Turbolinks loaded. Initializing flatpickr...");
+  try {
+    $('.datetime-picker').flatpickr({
+      enableTime: true,
+      dateFormat: 'Y-m-d H:i',
+    });
+    console.log("Flatpickr initialized successfully.");
+  } catch (error) {
+    console.error("Error initializing flatpickr:", error);
+  }
 });
 
 
