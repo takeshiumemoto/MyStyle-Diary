@@ -1,4 +1,8 @@
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbolinks:render', function() {
+  applyAnimations();
+});
+
+function applyAnimations() {
   const sections = document.querySelectorAll('.background-section');
   sections.forEach(section => {
     section.animate([
@@ -25,4 +29,7 @@ document.addEventListener('turbolinks:load', function() {
 
     heading.animate(keyframes, options);
   });
-});
+}
+
+// 初回ロード時にもアニメーションを適用
+document.addEventListener('turbolinks:load', applyAnimations);

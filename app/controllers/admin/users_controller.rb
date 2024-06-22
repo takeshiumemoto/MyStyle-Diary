@@ -5,7 +5,8 @@ class Admin::UsersController < ApplicationController
     end 
     
     def show
-        @user = User.find(params[:id])
+        @following_users = @user.following_users
+        @follower_users = @user.follower_users
     end 
     def withdraw
         @user = User.find(params[:id])
@@ -17,6 +18,8 @@ class Admin::UsersController < ApplicationController
           redirect_to admin_user_path(@user)
         end
     end
+    
+   
 private 
     def set_user
         @user = User.find(params[:id])

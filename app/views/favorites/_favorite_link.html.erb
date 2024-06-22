@@ -1,0 +1,11 @@
+<% if user_signed_in?%>
+<% if current_user.favorited?(post) %>
+  <%= link_to post_favorite_path(post), method: :delete, remote: true, class: "favorite-link btn btn-link p-0" do %>
+    <span style="color:red;">❤︎</span>
+  <% end %>
+<% else %>
+  <%= link_to post_favorite_path(post), method: :post, remote: true, class: "favorite-link btn btn-link p-0" do %>
+    <span style="color:blue;">❤︎</span>
+  <% end %>
+<% end %>
+<% end %> 

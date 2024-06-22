@@ -1,0 +1,13 @@
+<div class="media mb-4 p-3 border rounded" id="post_comment_<%= post_comment.id %>">
+  <%= link_to user_path(post_comment.user) do %>  
+    <%= image_tag post_comment.user.get_profile_image(100, 100), alt: 'Profile Image', class: 'rounded-circle mr-3 profile-image' %>
+  <% end %>  
+  <div class="media-body">
+    <h5 class="mt-0"><%= link_to post_comment.user.name, user_path(post_comment.user), class: 'text-decoration-none' %></h5>
+    <small class="text-muted"><%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %></small>
+    <p class="mt-2"><%= post_comment.comment %></p>
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: 'btn btn-danger mt-2', remote: true %>
+    <% end %>  
+  </div>
+</div>

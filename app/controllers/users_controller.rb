@@ -4,10 +4,11 @@ class UsersController < ApplicationController
     def index
         @post = Post.new 
         @user = current_user
-        @users = User.all 
         @users = User.where(is_active: true)
     end 
     
+    
+      
     def show
        @post = Post.new
        @user = User.find(params[:id])
@@ -25,6 +26,17 @@ class UsersController < ApplicationController
             render :edit, alert: 'プロフィールの更新に失敗しました。'
         end
     end
+    
+    def follows
+        @user = User.find(params[:id])
+        @users = @user.following_users
+    end 
+    
+    def followers
+        @user = User.find(params[:id])
+        @user = @user.follower_users
+    end 
+    
 private 
     def is_matching_login_user
         unless user_signed_in?&&current_user.id==params[:id].to_i

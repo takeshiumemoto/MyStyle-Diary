@@ -1,0 +1,28 @@
+<%= form_with model: event, url: events_path do |f| %>
+  <% if event.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :"予定" %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :"開始時間" %>
+    <%= f.text_field :start, class: 'form-control datetime-picker' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :"終了時間" %>
+    <%= f.text_field :end, class: 'form-control datetime-picker' %>
+  </div>
+
+  <%= f.submit 'イベント作成', class: 'btn btn-primary' %>
+<% end %>
