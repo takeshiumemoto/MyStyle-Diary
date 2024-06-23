@@ -11,8 +11,10 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: '投稿が作成されました。'
     else
+      @user = current_user
       @posts = Post.all
-      render :index, alert: '投稿に失敗しました。入力内容を確認してください。'
+      flash.now[:alert]='投稿に失敗しました。入力内容を確認してください。'
+      render :index
     end
   end
 
