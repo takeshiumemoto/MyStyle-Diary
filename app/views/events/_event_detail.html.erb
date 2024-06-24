@@ -1,0 +1,8 @@
+<!-- app/views/events/_event_detail.html.erb -->
+<h2>イベント詳細</h2>
+<p><strong>タイトル:</strong> <%= @event.title %></p>
+<p><strong>開始日時:</strong> <%= @event.start.strftime('%Y/%m/%d %H:%M') %></p>
+<p><strong>終了日時:</strong> <%= @event.end.strftime('%Y/%m/%d %H:%M') %></p>
+<%= link_to '編集', edit_event_path(@event), class: 'btn btn-warning' %>
+<%= link_to '削除', event_path(@event), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+<%= link_to 'カレンダーに戻る', events_path, class: 'btn btn-secondary' %>

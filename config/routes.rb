@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   end   
   get 'search'=>'searches#search'
   
-  resources :events, only: [:new, :create, :index, :show]  
+  resources :events
   get 'favorites',to:'favorites#index',as:'user_favorites'
   #user退会処理
   get 'user/check'=>'users#check'
