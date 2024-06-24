@@ -37,6 +37,17 @@ class UsersController < ApplicationController
         @followersr = @user.follower_users
     end 
     
+    def check
+    end 
+    
+    def withdraw
+        @user = User.find(current_user.id)
+        @user.update(is_active: false)
+        reset_session
+        flash[:notice]="退会処理を実行いたしました"
+        redirect_to root_path
+    end     
+    
 private 
     def is_matching_login_user
         unless user_signed_in?&&current_user.id==params[:id].to_i

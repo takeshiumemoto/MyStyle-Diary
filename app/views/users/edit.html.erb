@@ -1,14 +1,25 @@
-<h2>プロフィール編集</h2>
-<%= form_with model: @user, local: true do |f| %>
-  <div class="mb-3">
-    <%= f.label :name, "名前" %>
-    <%= f.text_field :name, class: 'form-control' %>
+<h2 class="text-center">プロフィール編集</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with model: @user, local: true, html: { class: 'form' } do |f| %>
+        <div class="mb-3">
+          <%= f.label :name, "名前" %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :profile_image, "プロフィール画像" %>
+          <%= f.file_field :profile_image, accept: "image/*", class: 'form-control' %>
+        </div>
+        <div class="d-grid mt-4">
+          <%= f.submit '更新', class: 'btn btn-primary btn-block' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="mb-3">
-    <%= f.label :profile_image, "プロフィール画像" %>
-    <%= f.file_field :profile_image, accept: "image/*", class: 'form-control' %>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6 text-center">
+      <%= link_to "退会フォーム", user_check_path, class: "btn btn-danger btn-sm" %>
+    </div>
   </div>
-  <div class="d-grid">
-    <%= f.submit '更新', class: 'btn btn-primary' %>
-  </div>
-<% end %>
+</div>
