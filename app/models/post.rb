@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   validates :title,presence: true
-  validates :content,presence:true
+  validates :content,presence: true
   has_many :post_comments,dependent: :destroy
   has_many :favorites,dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user

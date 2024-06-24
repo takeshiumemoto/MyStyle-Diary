@@ -18,7 +18,7 @@
               <%= image_tag follower.get_profile_image(50, 50), class: 'rounded-circle' %>
             <% end %>
           </td>
-          <td><%= follower.name %></td>
+          <td><%= link_to follower.name,user_path(follower) %></td>
           <td>
             <%= link_to follows_user_path(follower), class: 'text-decoration-none' do %>
               <h6><%= follower.following_users.count %> フォロー</h6>
