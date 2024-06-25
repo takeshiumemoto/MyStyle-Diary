@@ -34,6 +34,6 @@ class FavoritesController < ApplicationController
   end 
   
   def index 
-    @favorites = current_user.favorites.includes(:post).order('created_at DESC')
+     @favorites = current_user.favorites.includes(:post).page(params[:page]).per(8)
   end
 end   

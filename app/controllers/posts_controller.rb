@@ -18,19 +18,22 @@ class PostsController < ApplicationController
     end
   end
 
+  
   def index
     if params[:latest]
-      @posts = Post.latest.limit(8)
+      @posts = Post.latest.page(params[:page]).per(8)
     elsif params[:old]
-      @posts = Post.old.limit(8)
+      @posts = Post.old.page(params[:page]).per(8)
     elsif params[:favorite_count]
-      @posts = Post.favorite_count.limit(8)
+      @posts = Post.favorite_count.page(params[:page]).per(8)
     else
-      @posts = Post.all.order(created_at: :desc).limit(8)
+      @posts = Post.all.order(created_at: :desc).page(params[:page]).per(8)
     end
     @post = Post.new
     @user = current_user if user_signed_in?
   end
+
+
   
   def show
     @post = Post.find(params[:id])
