@@ -5,7 +5,7 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import flatpickr from 'flatpickr';  // flatpickrをインポート
-
+import 'flatpickr/dist/flatpickr.min.css';
 $(document).on('turbolinks:load', function () {
     function clearCalendar() {
         $('#calendar').html('');
