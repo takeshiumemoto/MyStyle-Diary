@@ -8,9 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Popper from 'popper.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import 'packs/calendar'; // Assuming calendar.js is in packs
+import 'packs/calendar';
 
-// グローバルに設定
 window.$ = $;
 window.jQuery = $;
 window.Popper = Popper;

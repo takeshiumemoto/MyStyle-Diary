@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import flatpickr from 'flatpickr';  // flatpickrをインポート
+import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 $(document).on('turbolinks:load', function () {
@@ -37,7 +37,7 @@ $(document).on('turbolinks:load', function () {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
         const day = date.getDate();
-        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00`;  // クリックした日付をフォーマット
+        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00`;
 
         $.ajax({
           type: 'GET',
@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function () {
             flatpickr('.datetime-picker', {
               enableTime: true,
               dateFormat: 'Y-m-dTH:i',
-              defaultDate: formattedDate  // フォームの初期日付にセット
+              defaultDate: formattedDate
             });
             $('#modal').modal('show');
           },
