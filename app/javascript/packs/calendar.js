@@ -18,6 +18,7 @@ $(document).on('turbolinks:load', function () {
             plugins: [dayGridPlugin, listPlugin, interactionPlugin],
             initialView: 'dayGridMonth',
             locale: 'ja',
+            timeZone: 'Asia/Tokyo', // タイムゾーンを日本標準時に設定
             events: {
                 url: '/events.json',
                 method: 'GET',
@@ -37,7 +38,7 @@ $(document).on('turbolinks:load', function () {
                 const year = date.getFullYear();
                 const month = date.getMonth() + 1;
                 const day = date.getDate();
-                const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00`;  // クリックした日付をフォーマット
+                const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00`;
 
                 $.ajax({
                     type: 'GET',
@@ -50,7 +51,7 @@ $(document).on('turbolinks:load', function () {
                         flatpickr('.datetime-picker', {
                             enableTime: true,
                             dateFormat: 'Y-m-dTH:i',
-                            defaultDate: formattedDate  // フォームの初期日付にセット
+                            defaultDate: new Date(date.getTime() + (date.getTimezoneOffset() * 60000) + (9 * 3600000)) // 日本標準時に調整
                         });
                         $('#modal').modal('show');
                     },
