@@ -8,7 +8,11 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    tags = Vision.get_image_data(post_params[:image])
     if @post.save
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end   
       redirect_to posts_path, notice: '投稿が作成されました。'
     else
       @user = current_user
