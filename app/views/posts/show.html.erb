@@ -20,6 +20,9 @@
     <% end %>
     <div class="card-body">
       <p class="card-text"><%= @post.content %></p>
+      <% @post.tags.each do |tag| %>
+        <span class="badge badge-primary"><%= tag.name %></span>
+      <% end %>
       <p class="card-text">投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
       <p class="card-text favorite-count" id="favorite-count-<%= @post.id %>">
         <%= @post.favorites.count %> いいね
