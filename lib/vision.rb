@@ -33,12 +33,20 @@ module Vision
       request['Content-Type'] = 'application/json'
       response = https.request(request, params)
       response_body = JSON.parse(response.body)
+
       # APIレスポンス出力
-      if (error = response_body['responses'][0]['error']).present?
-        raise error['message']
+      if response_body['responses'].present? && response_body['responses'][0].present?
+        if (error = response_body['responses'][0]['error']).present?
+          raise error['message']
+        else
+          return response_body['responses'][0]['labelAnnotations'].pluck('description').take(3)
+        end
       else
-        response_body['responses'][0]['labelAnnotations'].pluck('description').take(3)
+        raise 'Unexpected API response format'
       end
+    rescue => e
+      Rails.logger.error("Vision API Error: #{e.message}")
+      return []
     end
   end
 end
