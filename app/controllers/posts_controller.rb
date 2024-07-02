@@ -7,22 +7,21 @@ class PostsController < ApplicationController
   end
 
   def create
-  @post = current_user.posts.build(post_params)
-  if @post.save
+    @post = current_user.posts.build(post_params)
     tags = Vision.get_image_data(post_params[:image])
-    Rails.logger.info "Tags: #{tags.inspect}" # デバッグ出力
-    tags.each do |tag|
-      @post.tags.create(name: tag)
-      Rails.logger.info "Created tag: #{tag}" # デバッグ出力
+    if @post.save
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end   
+      redirect_to posts_path, notice: '投稿が作成されました。'
+    else
+      @user = current_user
+      @posts = Post.all
+      flash.now[:alert]='投稿に失敗しました。入力内容を確認してください。'
+      render :index
     end
-    redirect_to posts_path, notice: '投稿が作成されました。'
-  else
-    @user = current_user
-    @posts = Post.all
-    flash.now[:alert] = '投稿に失敗しました。入力内容を確認してください。'
-    render :index
   end
-end
+
   
   def index
     if params[:latest]
