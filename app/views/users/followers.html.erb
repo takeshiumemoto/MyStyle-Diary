@@ -1,4 +1,4 @@
-<h2>Followers</h2>
+<h2><%= @user.name%>さんのフォロワー一覧</h2>
 <table class='table'>
   <thead>
     <tr>
@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <% if @followers.present? %>
-      <% @followers.each do |follower| %> <!-- @followers を利用 -->
+      <% @followers.each do |follower| %> 
         <tr>
           <td>
             <%= link_to user_path(follower) do %>

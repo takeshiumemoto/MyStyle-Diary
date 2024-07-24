@@ -7,18 +7,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-$(document).on('turbolinks:load', function () {
-    function clearCalendar() {
-        $('#calendar').html('');
-    }
-
+function initializeCalendar() {
     const calendarEl = document.getElementById('calendar');
     if (calendarEl) {
         const calendar = new Calendar(calendarEl, {
             plugins: [dayGridPlugin, listPlugin, interactionPlugin],
             initialView: 'dayGridMonth',
             locale: 'ja',
-            timeZone: 'Asia/Tokyo', // タイムゾーンを日本標準時に設定
+            timeZone: 'Asia/Tokyo',
             events: {
                 url: '/events.json',
                 method: 'GET',
@@ -59,10 +55,34 @@ $(document).on('turbolinks:load', function () {
                         alert('エラーが発生しました。運営に問い合わせてください。');
                     }
                 });
+            },
+            eventClick: function(info) {
+                const eventId = info.event.id;
+
+                $.ajax({
+                    type: 'GET',
+                    url: `/events/${eventId}`,
+                    headers: {
+                        'Accept': 'text/html'
+                    },
+                    success: function(res) {
+                        $('.modal-body').html(res);
+                        $('#modal').modal('show');
+                    },
+                    error: function() {
+                        alert('エラーが発生しました。運営に問い合わせてください。');
+                    }
+                });
             }
         });
         calendar.render();
     }
+}
 
-    $(document).on('turbolinks:before-cache', clearCalendar);
+$(document).on('turbolinks:load', function () {
+    initializeCalendar();
+});
+
+$(document).on('turbolinks:before-cache', function() {
+    clearCalendar();
 });

@@ -19,7 +19,7 @@
       </div>
     <% end %>
     <div class="card-body">
-      <p class="card-text"><%= @post.content %></p>
+      <p class="card-text"><%= simple_format(@post.content,sanitize:true) %></p>
       <% @post.tags.each do |tag| %>
         <span class="badge badge-primary"><%= tag.name %></span>
       <% end %>

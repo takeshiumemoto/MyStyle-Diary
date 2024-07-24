@@ -1,8 +1,31 @@
 <!-- app/views/events/_event_detail.html.erb -->
-<h2>イベント詳細</h2>
-<p><strong>タイトル:</strong> <%= @event.title %></p>
-<p><strong>開始日時:</strong> <%= @event.start.strftime('%Y/%m/%d %H:%M') %></p>
-<p><strong>終了日時:</strong> <%= @event.end.strftime('%Y/%m/%d %H:%M') %></p>
-<%= link_to '編集', edit_event_path(@event), class: 'btn btn-warning' %>
-<%= link_to '削除', event_path(@event), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-<%= link_to 'カレンダーに戻る', events_path, class: 'btn btn-secondary' %>
+<div class="modal-header">
+  <h5 class="modal-title" id="eventDetailModalLabel">イベント詳細</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col">
+        <h2><%= @event.title %></h2>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <p><strong>開始日時:</strong> <%= @event.start.strftime('%Y/%m/%d %H:%M') %></p>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <p><strong>終了日時:</strong> <%= @event.end.strftime('%Y/%m/%d %H:%M') %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <%= link_to '編集', edit_event_path(@event), class: 'btn btn-warning mr-auto' %>
+  <%= link_to '削除', event_path(@event), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+</div>
